@@ -1,6 +1,7 @@
 from sqlalchemy import text, insert
-from src.database import sync_engine, async_engine
+from src.database import sync_engine, async_engine, session_factory
 from src.models import metadata, workers_table
+from src.models import Worker
 
 
 def get_123_sync():
@@ -15,17 +16,18 @@ async def get_123_async():
         print(f"{res.all()=}")
 
 
-def create_tables():
-    sync_engine.echo = False
-    metadata.drop_all(sync_engine)
-    metadata.create_all(sync_engine)
-    sync_engine.echo = True
+# def create_tables():
+#     sync_engine.echo = False
+#     metadata.drop_all(sync_engine)
+#     metadata.create_all(sync_engine)
+#     sync_engine.echo = True
 
 
-def insert_data():
-    with sync_engine.connect() as conn:
-        # stmt = """INSERT INTO workers (username) VALUES ('bobr'), ('vovk');"""
-        # conn.execute(text(stmt))
-        stmt = insert(workers_table).values([{"username": "bobr11"}, {"username": "vovk11"}])  # query builder
-        conn.execute(stmt)
-        conn.commit()
+# def insert_data():
+#     with sync_engine.connect() as conn:
+#         # stmt = """INSERT INTO workers (username) VALUES ('bobr'), ('vovk');"""
+#         # conn.execute(text(stmt))
+#         stmt = insert(workers_table).values([{"username": "bobr11"}, {"username": "vovk11"}])  # query builder
+#         conn.execute(stmt)
+#         conn.commit()
+
