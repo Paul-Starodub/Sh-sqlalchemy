@@ -9,14 +9,14 @@ def create_tables():
     sync_engine.echo = True
 
 
-# def insert_data():  # use sync session
-#     with session_factory() as session:
-#         worker_bobr = Worker(username="bobr999")
-#         worker_vovk = Worker(username="vovk777")
-#         # session.add(worker_bobr)
-#         # session.add(worker_vovk)
-#         session.add_all([worker_bobr, worker_vovk])
-#         session.commit()
+def insert_data():  # use sync session
+    with session_factory() as session:
+        worker_bobr = Worker(username="bobr999")
+        worker_vovk = Worker(username="vovk777")
+        # session.add(worker_bobr)
+        # session.add(worker_vovk)
+        session.add_all([worker_bobr, worker_vovk])
+        session.commit()
 
 
 async def insert_data():  # use async session
