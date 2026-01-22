@@ -1,11 +1,11 @@
-from src.database import sync_engine, session_factory, async_session_factory
+from src.database import sync_engine, session_factory, async_session_factory, Base
 from src.models import metadata, Worker
 
 
 def create_tables():
-    sync_engine.echo = False
-    metadata.drop_all(sync_engine)
-    metadata.create_all(sync_engine)
+    sync_engine.echo = True
+    Base.metadata.drop_all(sync_engine)
+    Base.metadata.create_all(sync_engine)
     sync_engine.echo = True
 
 

@@ -1,5 +1,7 @@
 import asyncio
-from sqlalchemy import create_engine, text
+from typing import Annotated
+
+from sqlalchemy import create_engine, text, Column, String
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import Session, sessionmaker, DeclarativeBase
 
@@ -55,6 +57,11 @@ async_session_factory = async_sessionmaker(async_engine)
 # async with async_session() as session:  # requires wrapping in async with
 #     await session.execute(text("SELECT VERSION()"))
 
+# custom type
+str_200 = Annotated[str, 200]
+
 
 class Base(DeclarativeBase):
-    pass
+    type_annotation_map = {
+        str_200: String(200),
+    }
